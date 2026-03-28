@@ -1,48 +1,58 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-caminho_arquivo = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\dataset\dataset_amamentacao_filtrado.csv'
+# ==========================================
+# 1. CONFIGURAÇÕES E CAMINHOS (Constantes)
+# ==========================================
+CAMINHO_ENTRADA = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\dataset\dataset_amamentacao_filtrado.csv'
+CAMINHO_GRAFICO_NULOS = 'contagem_valores_nulos.jpg'
 
-df = pd.read_csv(caminho_arquivo, encoding='utf-8')
+# ==========================================
+# 2. CARREGAMENTO DOS DADOS E INFORMAÇÕES
+# ==========================================
+df = pd.read_csv(CAMINHO_ENTRADA, encoding='utf-8')
 
-# 1. Resumo dos tipos de dados identificados pelo Pandas
 print("Resumo dos tipos de dados identificados pelo Pandas:")
 df.info() 
+print("\n" + "="*50 + "\n")
 
-# ====================================================================================
-# 2. Gráfico de barras para visualizar a quantidade de valores nulos por atributo
-
-# 2.1. Configurar o tamanho da figura
+# ==========================================
+# 3. ANÁLISE EXPLORATÓRIA: VALORES NULOS
+# ==========================================
+# Configurar o tamanho da figura
 plt.figure(figsize=(12, 6))
 
-# 2.2. Criar o gráfico de barras
-df.isnull().sum().sort_values(ascending=False).plot(kind='bar')
+# Criar o gráfico de barras ordenado
+df.isnull().sum().sort_values(ascending=False).plot(kind='bar', color='#4C72B0', edgecolor='black')
 
-# 2.3. Adicionar títulos e rótulos
-plt.title('Quantidade de Valores Nulos por Atributo')
-plt.xlabel('Atributos')
-plt.ylabel('Quantidade de Valores Nulos')
+# Adicionar títulos e rótulos
+plt.title('Quantidade de Valores Nulos por Atributo', fontsize=14, fontweight='bold')
+plt.xlabel('Atributos', fontsize=12)
+plt.ylabel('Quantidade de Valores Nulos', fontsize=12)
 plt.xticks(rotation=90)
+
+# Ajustar layout para não cortar as margens
 plt.tight_layout() 
 
+# Gerar e salvar o gráfico
+plt.savefig(CAMINHO_GRAFICO_NULOS, bbox_inches='tight')
+plt.close() # Fechar a figura da memória
+print(f"Gráfico de valores nulos salvo com sucesso como '{CAMINHO_GRAFICO_NULOS}'!")
 
-# 2.4. Gerar jpg do gráfico (usando bbox_inches='tight' como garantia extra)
-plt.savefig('contagem_valores_nulos.jpg', bbox_inches='tight')
-
-# 2.5. Fechar a figura da memória (boa prática!)
-plt.close()
-# ====================================================================================
-
-# 2. Isolar as colunas baseadas no tipo de dado (dtype)
-# 'number' pega int64 e float64. 
+# ==========================================
+# 4. SEPARAÇÃO DOS TIPOS DE DADOS
+# ==========================================
+# 'number' isola variáveis int64 e float64
 cols_numericas = df.select_dtypes(include=['number']).columns.tolist()
 
-# 'object' pega strings, 'category' para tipos categoricos do pandas e 'bool' para booleanos
+# 'object', 'category' e 'bool' isolam as variáveis categóricas
 cols_categoricas = df.select_dtypes(include=['object', 'category', 'bool']).columns.tolist()
 
-# 3. Exibindo os resultados
+# Exibir os resultados da separação
+print("\n" + "-" * 50)
 print(f"Total de Variáveis Numéricas: {len(cols_numericas)}")
 print(cols_numericas)
 print("-" * 50)
 print(f"Total de Variáveis Categóricas: {len(cols_categoricas)}")
 print(cols_categoricas)
+print("-" * 50)
