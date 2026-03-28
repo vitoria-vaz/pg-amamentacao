@@ -1,6 +1,7 @@
 import pandas as pd
-
-df = pd.read_csv('pg-amamentacao\dataset\dataset_amamentacao.csv', encoding='utf-8')
+caminho_arquivo = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\dataset\dataset_amamentacao.csv'
+caminho_arquivo_filtrado = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\dataset\dataset_amamentacao_filtrado.csv'
+df = pd.read_csv(caminho_arquivo, encoding='utf-8')
 
 # ---------------------------------------------------------
 # PASSO 1.1: Listando os atributos a serem excluídos
@@ -23,6 +24,6 @@ atributos_para_excluir = ['k18_somente',
 # ---------------------------------------------------------
 df_filtrado = df.drop(columns=atributos_para_excluir)
 print("Atributos excluídos com sucesso!")
-df_filtrado.to_csv('pg-amamentacao\dataset\dataset_amamentacao_filtrado.csv', index=False, encoding='utf-8')
+df_filtrado.to_csv(caminho_arquivo_filtrado, index=False, encoding='utf-8')
 print("Dataset filtrado salvo com sucesso!")
 
