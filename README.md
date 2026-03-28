@@ -32,4 +32,4 @@ Os dados utilizados neste projeto contêm informações clínicas e demográfica
 
 1. Clone este repositório:
    ```bash
-   git clone [[https://github.com/](https://github.com/) vitoria-vaz/pg-amamentacao.git](https://github.com/vitoria-vaz/pg-amamentacao.git)
+   git clone https://github.com/vitoria-vaz/pg-amamentacao.git
