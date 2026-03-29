@@ -37,6 +37,9 @@ def cramers_v(x, y):
 # 3. CARREGAMENTO DOS DADOS
 # ==========================================
 df = pd.read_csv(CAMINHO_ENTRADA, encoding='utf-8')
+print("Resumo dos tipos de dados identificados pelo Pandas no dataset tratado:")
+df.info() 
+print("\n" + "="*50 + "\n")
 
 # Selecionar apenas as colunas categóricas (o que deve ser 100% delas a essa altura)
 df_cat = df.select_dtypes(include=['object', 'category', 'bool'])
@@ -65,8 +68,8 @@ plt.figure(figsize=(24, 20))
 
 # Criar o heatmap usando a biblioteca Seaborn
 # cmap='Blues' deixa tons mais escuros para correlações mais fortes
-sns.heatmap(matriz_cramer, annot=False, cmap='Blues', fmt=".2f", 
-            linewidths=0.5, cbar_kws={"shrink": .8})
+sns.heatmap(matriz_cramer, annot=True, cmap='Blues', fmt=".2f", 
+            linewidths=0.5, cbar_kws={"shrink": .8}, annot_kws={"size": 8})
 
 plt.title("Mapa de Calor: Associação V de Cramér entre Atributos", fontsize=20, fontweight='bold', pad=20)
 plt.xticks(rotation=90, fontsize=10)

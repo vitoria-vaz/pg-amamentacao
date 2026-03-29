@@ -6,7 +6,6 @@ import matplotlib.pyplot as plt
 # ==========================================
 CAMINHO_ENTRADA = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\dataset\dataset_amamentacao_sem_nulos.csv'
 CAMINHO_SAIDA   = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\dataset\dataset_amamentacao_discretizado.csv'
-CAMINHO_GRAFICO = 'distribuicao_idade_mae.jpg'
 
 # ==========================================
 # 2. CARREGAMENTO DOS DADOS
@@ -14,44 +13,45 @@ CAMINHO_GRAFICO = 'distribuicao_idade_mae.jpg'
 df = pd.read_csv(CAMINHO_ENTRADA, encoding='utf-8')
 
 # ==========================================
-# 3. PRÉ-PROCESSAMENTO (Limpeza e Discretização)
+# 3. LIMPEZA DE REDUNDÂNCIAS
 # ==========================================
-# Remover variáveis numéricas redundantes
-df = df.drop(columns=['h02_peso', 'q06_renda'])
-
-# Discretizar a Idade da Mãe
-limites_idade = [9, 19, 34, 100]
-rotulos_idade = ['Adolescente', 'Adulta', 'Idade Avançada']
-
-df['idade_mae_cat'] = pd.cut(df['bb04_idade_da_mae'], bins=limites_idade, labels=rotulos_idade)
-
-# Descartar a numérica original após criar a categórica
-df = df.drop(columns=['bb04_idade_da_mae'])
-print("Variáveis originais removidas e idade da mãe discretizada com sucesso!")
+# Remover variáveis numéricas que já possuem versão categórica pronta no dataset
+colunas_para_remover = ['h02_peso', 'q06_renda', 'vd_ebia_escore', 'tempo_1a_amament']
+df = df.drop(columns=colunas_para_remover)
+print("✅ Variáveis numéricas redundantes descartadas.")
 
 # ==========================================
-# 4. SALVAR DADOS TRANSFORMADOS
+# 4. DISCRETIZAÇÃO DAS VARIÁVEIS NUMÉRICAS
+# ==========================================
+# A. Idade da Mãe
+df['idade_mae_cat'] = pd.cut(
+    df['bb04_idade_da_mae'], 
+    bins=[9, 19, 34, 100], 
+    labels=['Adolescente', 'Adulta', 'Idade Avançada']
+)
+
+# B. Idade do Filho (em meses)
+df['idade_filho_cat'] = pd.cut(
+    df['idade_filho'], 
+    bins=[0, 6, 12, 100], 
+    labels=['0 a 6 meses', '6 a 12 meses', 'Mais de 1 ano'],
+    include_lowest=True
+)
+
+# C. Número de Gestações e Filhos Vivos
+limites_filhos = [1, 1.5, 3.5, 50]
+rotulos_filhos = ['1', '2 a 3', '4 ou mais']
+
+df['gestacoes_cat'] = pd.cut(df['k01_gestacoes'], bins=limites_filhos, labels=rotulos_filhos, include_lowest=True)
+df['filhos_vivos_cat'] = pd.cut(df['k02_filhos_vivos'], bins=limites_filhos, labels=rotulos_filhos, include_lowest=True)
+
+# D. Remover as numéricas originais que acabaram de ser discretizadas
+# NOTA: Manteremos k28_rec como número até descobrirmos seu significado clínico
+df = df.drop(columns=['bb04_idade_da_mae', 'idade_filho', 'k01_gestacoes', 'k02_filhos_vivos'])
+print("✅ Discretização das idades e histórico materno concluída.")
+
+# ==========================================
+# 5. SALVAR DADOS TRANSFORMADOS
 # ==========================================
 df.to_csv(CAMINHO_SAIDA, index=False, encoding='utf-8')
-print(f"Dataset discretizado salvo em: {CAMINHO_SAIDA}\n")
-
-# ==========================================
-# 5. ANÁLISE EXPLORATÓRIA (Gráficos)
-# ==========================================
-# Contar e ordenar as categorias
-contagem_idade = df['idade_mae_cat'].value_counts().sort_index()
-
-# Plotar gráfico
-plt.figure(figsize=(8, 6))
-contagem_idade.plot(kind='bar', color=['#55A868', '#4C72B0', '#C44E52'], edgecolor='black')
-
-plt.title('Distribuição da Idade das Mães', fontsize=14, fontweight='bold')
-plt.xlabel('Faixa Etária', fontsize=12)
-plt.ylabel('Quantidade de Mães', fontsize=12)
-plt.xticks(rotation=0) 
-
-plt.tight_layout()
-plt.savefig(CAMINHO_GRAFICO, bbox_inches='tight')
-plt.close()
-
-print(f"Gráfico gerado e salvo com sucesso como '{CAMINHO_GRAFICO}'!")
+print(f"\n🚀 Dataset 100% discretizado salvo em:\n{CAMINHO_SAIDA}")

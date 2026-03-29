@@ -12,32 +12,41 @@ CAMINHO_SAIDA   = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamen
 df = pd.read_csv(CAMINHO_ENTRADA, encoding='utf-8')
 
 # ==========================================
-# 3. PRÉ-PROCESSAMENTO (Tratamento de Nulos)
+# 3. TRATAMENTO DE OUTLIERS E ANOMALIAS
 # ==========================================
+# Substituir o código 99 (Não sabe/Ignorado) pela mediana 
+# NOTA: A mediana é calculada ignorando os próprios 99s para não ser enviesada.
+mediana_gest = df.loc[df['k01_gestacoes'] != 99, 'k01_gestacoes'].median()
+mediana_filhos = df.loc[df['k02_filhos_vivos'] != 99, 'k02_filhos_vivos'].median()
 
+df['k01_gestacoes'] = df['k01_gestacoes'].replace(99, mediana_gest)
+df['k02_filhos_vivos'] = df['k02_filhos_vivos'].replace(99, mediana_filhos)
+print("✅ Outliers e códigos de erro (99) tratados com sucesso!")
+
+# ==========================================
+# 4. TRATAMENTO DE VALORES NULOS
+# ==========================================
 # A. Excluir colunas com excesso de nulos (quase 100%)
 colunas_para_remover = ['k09_licenca', 'k10_meses']
 df = df.drop(columns=colunas_para_remover)
-print(f"Colunas {colunas_para_remover} removidas com sucesso!")
+print(f"✅ Colunas vazias {colunas_para_remover} removidas.")
 
-# B. Tratar ausências pequenas nas numéricas
-# NOTA: Preenchendo com a mediana para manter o máximo de dados possível, 
-# mas futuramente pode-se avaliar a exclusão destas instâncias.
+# B. Tratar ausências pequenas nas numéricas (agora com a base limpa de outliers)
 df['bb04_idade_da_mae'] = df['bb04_idade_da_mae'].fillna(df['bb04_idade_da_mae'].median())
 df['k28_rec'] = df['k28_rec'].fillna(df['k28_rec'].median())
 
-# C. Tratar ausências moderadas nas categóricas (criando categoria "Desconhecido")
+# C. Tratar ausências moderadas nas categóricas
 df['inic_prenat'] = df['inic_prenat'].fillna("Desconhecido")
 df['num_consultas'] = df['num_consultas'].fillna("Desconhecido")
+print("✅ Valores nulos preenchidos com sucesso!")
 
 # ==========================================
-# 4. VERIFICAÇÃO E SALVAMENTO
+# 5. VERIFICAÇÃO E SALVAMENTO
 # ==========================================
 total_nulos_restantes = df.isnull().sum().sum()
-print(f"\nQuantidade total de valores nulos no dataset agora: {total_nulos_restantes}")
 
 if total_nulos_restantes == 0:
     df.to_csv(CAMINHO_SAIDA, index=False, encoding='utf-8')
-    print(f"Dataset limpo e sem nulos salvo em:\n{CAMINHO_SAIDA}")
+    print(f"\n🚀 Dataset limpo, sem outliers e sem nulos salvo em:\n{CAMINHO_SAIDA}")
 else:
-    print("ATENÇÃO: Ainda existem valores nulos no dataset. O arquivo não foi salvo.")
+    print(f"\n⚠️ ATENÇÃO: Ainda existem {total_nulos_restantes} valores nulos no dataset. Arquivo não salvo.")
