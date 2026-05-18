@@ -47,7 +47,7 @@ for coluna in df.columns:
         
     # ---- Se a variável for CATEGÓRICA ----
     else:
-        # O PULO DO GATO: Substitui os NaNs temporariamente por um texto visível 
+        # Substitui os NaNs temporariamente por um texto visível 
         # para que eles apareçam como uma barra vermelha no gráfico!
         df_temp = df[coluna].copy()
         if df_temp.isnull().any():
