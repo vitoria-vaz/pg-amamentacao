@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 # 1. CONFIGURAÇÕES E CAMINHOS (Constantes)
 # ==========================================
 CAMINHO_ENTRADA = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\dataset\dataset_amamentacao_pronto.csv'
+CAMINHO_SAIDA = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\dataset\dataset_amamentacao_pronto.xlsx' 
 CAMINHO_GRAFICO_CALOR = 'mapa_calor_cramers_v.jpg'
 
 # ==========================================
@@ -37,6 +38,10 @@ def cramers_v(x, y):
 # 3. CARREGAMENTO DOS DADOS
 # ==========================================
 df = pd.read_csv(CAMINHO_ENTRADA, encoding='utf-8')
+
+df.to_excel(CAMINHO_SAIDA, index=False)
+print(f"Dataset carregado com sucesso! Total de atributos: {df.shape[1]}")
+
 print("Resumo dos tipos de dados identificados pelo Pandas no dataset tratado:")
 df.info() 
 print("\n" + "="*50 + "\n")
