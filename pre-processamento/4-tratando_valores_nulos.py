@@ -1,8 +1,8 @@
 import pandas as pd
 from sklearn.preprocessing import OrdinalEncoder
 from sklearn.tree import DecisionTreeClassifier
-from sklearn.model_selection import train_test_split # NOVO: Para o Holdout
-from sklearn.metrics import accuracy_score # NOVO: Para medir a Acurácia
+from sklearn.model_selection import train_test_split 
+from sklearn.metrics import accuracy_score 
 
 # ==========================================
 # 1. CONFIGURAÇÕES E CAMINHOS
