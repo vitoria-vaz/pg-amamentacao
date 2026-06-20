@@ -11,6 +11,7 @@ df = pd.read_csv(CAMINHO_ENTRADA, encoding='utf-8')
 # ==========================================
 # 2. LIMPEZA DE REDUNDÂNCIAS
 # ==========================================
+# o que é o atributo vd_ebia_escore? deve remover ele? como discretizar ele?
 colunas_para_remover = ['vd_ebia_escore', 'tempo_1a_amament']
 colunas_existentes = [col for col in colunas_para_remover if col in df.columns]
 df = df.drop(columns=colunas_existentes)
