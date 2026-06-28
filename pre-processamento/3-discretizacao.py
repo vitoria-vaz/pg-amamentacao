@@ -31,7 +31,6 @@ df['idade_mae_cat'] = pd.cut(
 limites_filhos = [0.9, 1.5, 50]
 rotulos_filhos = ['Primípara (1)', 'Multípara (2 ou mais)'] 
 
-df['gestacoes_cat'] = pd.cut(df['k01_gestacoes'], bins=limites_filhos, labels=rotulos_filhos, include_lowest=True)
 df['filhos_vivos_cat'] = pd.cut(df['k02_filhos_vivos'], bins=limites_filhos, labels=rotulos_filhos, include_lowest=True)
 
 # C. Remover as numéricas originais (e a Idade do Filho e K28, que não vamos usar)
