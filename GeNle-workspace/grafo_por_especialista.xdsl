@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This network was created in GeNIe Academic, which can be used for academic teaching and research purposes only -->
+<smile version="1.0" id="Network1" numsamples="10000" discsamples="10000">
+	<nodes>
+		<cpt id="situacao_laboral_mae">
+			<state id="Trabalho_regular" />
+			<state id="Trabalho_irregular_bicos" />
+			<state id="Desempregado" />
+			<state id="Fora_mercado" />
+			<probabilities>0.5 0.5 0 0</probabilities>
+		</cpt>
+		<cpt id="faixa_renda_familiar">
+			<state id="Sem_renda" />
+			<state id="Ate_1000" />
+			<state id="De_1001_a_5000" />
+			<state id="mais_ou_5001" />
+			<parents>situacao_laboral_mae</parents>
+			<probabilities>0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0</probabilities>
+		</cpt>
+		<cpt id="zona_residencial">
+			<state id="Urbano" />
+			<state id="Rural" />
+			<probabilities>0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="nivel_inseguranca_alimentar">
+			<state id="Seguranca" />
+			<state id="Inseguranca_leve" />
+			<state id="Inseguranca_moderada" />
+			<state id="Inseguranca_grave" />
+			<parents>faixa_renda_familiar zona_residencial</parents>
+			<probabilities>0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0</probabilities>
+		</cpt>
+		<cpt id="escolaridade_mae">
+			<state id="Fundamental_I" />
+			<state id="Fundamental_II" />
+			<state id="Ensino_Medio" />
+			<state id="Superior" />
+			<parents>zona_residencial</parents>
+			<probabilities>0.5 0.5 0 0 0.5 0.5 0 0</probabilities>
+		</cpt>
+		<cpt id="faixa_etaria_mae">
+			<state id="Adolescente" />
+			<state id="Jovem_Adulta" />
+			<state id="Adulta" />
+			<state id="Maternidade_Tardia" />
+			<parents>escolaridade_mae nivel_inseguranca_alimentar faixa_renda_familiar</parents>
+			<probabilities>0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0 0.5 0.5 0 0</probabilities>
+		</cpt>
+		<cpt id="tipo_parto">
+			<state id="Normal" />
+			<state id="Cesariana_agendada" />
+			<state id="Cesariana_urgencia" />
+			<parents>faixa_etaria_mae</parents>
+			<probabilities>0.5 0.5 0 0.5 0.5 0 0.5 0.5 0 0.5 0.5 0</probabilities>
+		</cpt>
+		<cpt id="tempo_ate_primeira_mamada">
+			<state id="ate_1h" />
+			<state id="entre_1h_24h" />
+			<state id="maior_24h" />
+			<parents>tipo_parto</parents>
+			<probabilities>0.5 0.5 0 0.5 0.5 0 0.5 0.5 0</probabilities>
+		</cpt>
+		<cpt id="oferta_outros_liquidos">
+			<state id="sim" />
+			<state id="nao" />
+			<state id="desconhecido" />
+			<parents>tempo_ate_primeira_mamada situacao_laboral_mae</parents>
+			<probabilities>0.5 0.5 0 0.5 0.5 0 0.5 0.5 0 0.5 0.5 0 0.5 0.5 0 0.5 0.5 0 0.5 0.5 0 0.5 0.5 0 0.5 0.5 0 0.5 0.5 0 0.5 0.5 0 0.5 0.5 0</probabilities>
+		</cpt>
+		<cpt id="usou_mamadeira">
+			<state id="sim" />
+			<state id="nao" />
+			<parents>oferta_outros_liquidos</parents>
+			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+		<cpt id="alvo_sucesso_ame_6m">
+			<state id="sucesso" />
+			<state id="desmame_precoce" />
+			<parents>usou_mamadeira oferta_outros_liquidos</parents>
+			<probabilities>0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5 0.5</probabilities>
+		</cpt>
+	</nodes>
+	<extensions>
+		<genie version="1.0" app="GeNIe 5.0.6522.0 ACADEMIC" name="Network1">
+			<node id="situacao_laboral_mae">
+				<name>situacao_laboral_mae</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>42 15 186 86</position>
+			</node>
+			<node id="faixa_renda_familiar">
+				<name>faixa_renda_familiar</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>264 20 372 87</position>
+			</node>
+			<node id="nivel_inseguranca_alimentar">
+				<name>nivel_inseguranca_alimentar</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>441 6 601 107</position>
+			</node>
+			<node id="zona_residencial">
+				<name>zona_residencial</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>693 22 786 80</position>
+			</node>
+			<node id="escolaridade_mae">
+				<name>escolaridade_mae</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>664 304 763 365</position>
+			</node>
+			<node id="faixa_etaria_mae">
+				<name>faixa_etaria_mae</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>318 286 423 350</position>
+			</node>
+			<node id="tipo_parto">
+				<name>tipo_parto</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>327 445 389 483</position>
+			</node>
+			<node id="tempo_ate_primeira_mamada">
+				<name>tempo_ate_primeira_mamada</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>320 565 469 658</position>
+			</node>
+			<node id="oferta_outros_liquidos">
+				<name>oferta_outros_liquidos</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>53 478 171 551</position>
+			</node>
+			<node id="usou_mamadeira">
+				<name>usou_mamadeira</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>305 723 398 781</position>
+			</node>
+			<node id="alvo_sucesso_ame_6m">
+				<name>alvo_sucesso_ame_6m</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>130 783 254 860</position>
+			</node>
+		</genie>
+	</extensions>
+</smile>
