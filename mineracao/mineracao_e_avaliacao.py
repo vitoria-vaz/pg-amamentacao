@@ -23,6 +23,7 @@ modelos = {
 }
 
 lista_resultados = []
+lista_matrizes_confusao = [] # Nova lista para armazenar os dados das matrizes
 
 # Instanciar LabelEncoder para transformar a classe alvo categórica em binária (0 e 1)
 le = LabelEncoder()
@@ -63,8 +64,7 @@ for base_dir in input_base_dirs:
         X_treino_encoded.columns = X_treino_encoded.columns.str.replace(caracteres_proibidos, '_', regex=True)
         X_teste_encoded.columns = X_teste_encoded.columns.str.replace(caracteres_proibidos, '_', regex=True)
         
-        # Alinha as colunas de treino e teste. Se uma categoria apareceu no treino mas não no teste, 
-        # a coluna correspondente será criada no teste preenchida com 0.
+        # Alinha as colunas de treino e teste.
         X_treino_encoded, X_teste_encoded = X_treino_encoded.align(
             X_teste_encoded, join='left', axis=1, fill_value=0
         )
@@ -81,8 +81,6 @@ for base_dir in input_base_dirs:
             
             # --- Etapa de Interpretação (Predição e Métricas) ---
             y_pred = modelo.predict(X_teste_encoded)
-            
-            # y_prob traz a probabilidade contínua, necessária para a curva AUC-ROC
             y_prob = modelo.predict_proba(X_teste_encoded)[:, 1]
             
             # Cálculo das Métricas Diretas
@@ -91,11 +89,11 @@ for base_dir in input_base_dirs:
             f1 = f1_score(y_teste_enc, y_pred)
             auc_roc = roc_auc_score(y_teste_enc, y_prob)
             
-            # Cálculo da Especificidade via Matriz de Confusão
+            # Extração dos valores da Matriz de Confusão
             tn, fp, fn, tp = confusion_matrix(y_teste_enc, y_pred).ravel()
             especificidade = tn / (tn + fp) if (tn + fp) > 0 else 0.0
             
-            # Armazenar tudo para a tabela final
+            # 1. Armazenar as métricas na lista principal
             lista_resultados.append({
                 'Quantidade Atributos': qtde_atributos,
                 'Coleção': colecao,
@@ -107,15 +105,31 @@ for base_dir in input_base_dirs:
                 'AUC-ROC': round(auc_roc, 4)
             })
 
+            # 2. Armazenar as matrizes de confusão na nova lista
+            lista_matrizes_confusao.append({
+                'Quantidade Atributos': qtde_atributos,
+                'Coleção': colecao,
+                'Algoritmo': nome_modelo,
+                'Verdadeiros Negativos (VN)': tn,
+                'Falsos Positivos (FP)': fp,
+                'Falsos Negativos (FN)': fn,
+                'Verdadeiros Positivos (VP)': tp
+            })
+
 # 6. Compilação e Exportação
-# Transformar a lista de dicionários em um DataFrame do Pandas
 df_resultados = pd.DataFrame(lista_resultados)
+df_matrizes = pd.DataFrame(lista_matrizes_confusao)
 
-# Ordenar a tabela para facilitar a leitura no documento
+# Ordenar as tabelas para facilitar a leitura no documento
 df_resultados = df_resultados.sort_values(by=['Quantidade Atributos', 'Coleção', 'Algoritmo'])
+df_matrizes = df_matrizes.sort_values(by=['Quantidade Atributos', 'Coleção', 'Algoritmo'])
 
-# Exportar direto para o formato Excel para facilitar a formatação da sua monografia
+# Caminho do arquivo de saída
 caminho_tabela = os.path.join(output_dir, 'tabela_comparativa_algoritmos.xlsx')
-df_resultados.to_excel(caminho_tabela, index=False)
 
-print(f"Experimentos finalizados com sucesso! Tabela gerada em: {caminho_tabela}")
+# Utilizar o ExcelWriter para exportar múltiplas planilhas
+with pd.ExcelWriter(caminho_tabela, engine='openpyxl') as writer:
+    df_resultados.to_excel(writer, sheet_name='Métricas', index=False)
+    df_matrizes.to_excel(writer, sheet_name='Matrizes de Confusão', index=False)
+
+print(f"Experimentos finalizados com sucesso! Tabela com múltiplas planilhas gerada em: {caminho_tabela}")
