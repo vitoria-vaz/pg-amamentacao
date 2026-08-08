@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This network was created in GeNIe Academic, which can be used for academic teaching and research purposes only -->
+<smile version="1.0" id="dataset_amamentacao_renomeado" numsamples="10000" discsamples="10000">
+	<nodes>
+		<cpt id="faixa_renda_familiar">
+			<state id="Até_R__1_000_00" />
+			<state id="De_R__1_001_00_até_R__2_000_00" />
+			<state id="De_R__2_001_00_até_R__3_000_00" />
+			<state id="De_R__3_001_00_até_R__5_000_00" />
+			<state id="R__5_001_00_ou_mais" />
+			<state id="Sem_renda" />
+			<probabilities>0.2993447522703759 0.3711920910449477 0.165766180020692 0.1019657431888723 0.05058052649729854 0.01115070697781354</probabilities>
+		</cpt>
+		<cpt id="tipo_parto">
+			<state id="Cesariana_agendada__eletiva_" />
+			<state id="Cesariana_de_urgência__Não_agendada_" />
+			<state id="Normal" />
+			<parents>faixa_renda_familiar</parents>
+			<probabilities>0.1482334869431643 0.2534562211981567 0.5983102918586789 0.19634561783834 0.2462062558067513 0.5574481263549086 0.2704576976421637 0.2482662968099861 0.4812760055478502 0.3404735062006764 0.2705749718151071 0.3889515219842165 0.4340909090909091 0.2454545454545455 0.3204545454545454 0.2371134020618557 0.1237113402061856 0.6391752577319587</probabilities>
+		</cpt>
+		<cpt id="adequacao_peso_idade_gestacional">
+			<state id="AIG" />
+			<state id="GIG" />
+			<state id="PIG" />
+			<parents>tipo_parto</parents>
+			<probabilities>0.7990654205607476 0.07892004153686397 0.1220145379023884 0.7395306028531984 0.09894155545329039 0.1615278416935113 0.7780434782608696 0.04695652173913044 0.175</probabilities>
+		</cpt>
+		<cpt id="usou_mamadeira">
+			<state id="Não" />
+			<state id="Sim" />
+			<parents>adequacao_peso_idade_gestacional</parents>
+			<probabilities>0.8883271375464684 0.1116728624535316 0.8936535162950258 0.1063464837049743 0.884255930984903 0.1157440690150971</probabilities>
+		</cpt>
+		<cpt id="inicio_prenatal">
+			<state id="x12_semanas" />
+			<state id="≥12_semanas" />
+			<parents>faixa_renda_familiar</parents>
+			<probabilities>0.6977726574500768 0.3022273425499232 0.7572003716320842 0.2427996283679157 0.7766990291262136 0.2233009708737864 0.8207440811724915 0.1792559188275084 0.8681818181818182 0.1318181818181818 0.6494845360824743 0.3505154639175257</probabilities>
+		</cpt>
+		<cpt id="alvo_sucesso_ame_6m">
+			<state id="Desmame_precoce____6m_" />
+			<state id="Sucesso__AME_6m__" />
+			<parents>usou_mamadeira faixa_renda_familiar</parents>
+			<probabilities>0.5915254237288136 0.4084745762711864 0.5671328671328671 0.4328671328671329 0.5612244897959184 0.4387755102040817 0.5585585585585585 0.4414414414414414 0.4178272980501393 0.5821727019498607 0.5473684210526316 0.4526315789473684 0.6803278688524591 0.319672131147541 0.7235772357723578 0.2764227642276423 0.7619047619047619 0.2380952380952381 0.6272727272727272 0.3727272727272727 0.7407407407407407 0.2592592592592592 0.8333333333333333 0.1666666666666667</probabilities>
+		</cpt>
+		<cpt id="faixa_etaria_mae">
+			<state id="Adolescente" />
+			<state id="Adulta" />
+			<state id="Jovem_Adulta" />
+			<state id="Maternidade_Tardia" />
+			<parents>tipo_parto</parents>
+			<probabilities>0.02699896157840083 0.2642782969885774 0.3707165109034268 0.338006230529595 0.05798435342843995 0.2300966405890474 0.4776806258628624 0.2342383801196503 0.09869565217391305 0.1906521739130435 0.5332608695652175 0.1773913043478261</probabilities>
+		</cpt>
+		<cpt id="qtd_filhos_vivos">
+			<state id="Multípara__2_ou_mais_" />
+			<state id="Primípara__1_" />
+			<parents>faixa_renda_familiar faixa_etaria_mae</parents>
+			<probabilities>0.1556420233463035 0.8443579766536965 0.8272357723577237 0.1727642276422764 0.5786073223259153 0.4213926776740847 0.8961038961038961 0.1038961038961039 0.1152263374485597 0.8847736625514404 0.7525925925925926 0.2474074074074074 0.5088145896656535 0.4911854103343465 0.8768768768768769 0.1231231231231231 0.06578947368421052 0.9342105263157894 0.6984615384615385 0.3015384615384615 0.4595808383233533 0.5404191616766467 0.7989276139410187 0.2010723860589812 0.01470588235294118 0.9852941176470588 0.648 0.352 0.411764705882353 0.5882352941176471 0.8256227758007118 0.1743772241992882 0.05 0.9500000000000001 0.5116279069767442 0.4883720930232558 0.3228346456692913 0.6771653543307087 0.6514285714285715 0.3485714285714286 0.2142857142857143 0.7857142857142857 0.7333333333333333 0.2666666666666667 0.6326530612244897 0.3673469387755102 0.7894736842105263 0.2105263157894737</probabilities>
+		</cpt>
+	</nodes>
+	<extensions>
+		<genie version="1.0" app="GeNIe 5.0.6522.0 ACADEMIC" name="dataset_amamentacao_renomeado">
+			<node id="usou_mamadeira">
+				<name>usou_mamadeira</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>289 10 361 58</position>
+			</node>
+			<node id="tipo_parto">
+				<name>tipo_parto</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>103 10 175 58</position>
+			</node>
+			<node id="faixa_renda_familiar">
+				<name>faixa_renda_familiar</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>10 10 82 58</position>
+			</node>
+			<node id="inicio_prenatal">
+				<name>inicio_prenatal</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>103 72 175 120</position>
+			</node>
+			<node id="adequacao_peso_idade_gestacional">
+				<name>adequacao_peso_idade_gestacional</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>196 10 268 58</position>
+			</node>
+			<node id="alvo_sucesso_ame_6m">
+				<name>alvo_sucesso_ame_6m</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>382 10 454 58</position>
+			</node>
+			<node id="faixa_etaria_mae">
+				<name>faixa_etaria_mae</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>196 72 268 120</position>
+			</node>
+			<node id="qtd_filhos_vivos">
+				<name>qtd_filhos_vivos</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>289 72 361 120</position>
+			</node>
+			<textbox>
+				<caption>Input file: dataset_amamentacao_renomeado.csv\nData rows: 8699\nElapsed time: 59.922s\n\nLearning algorithm: Bayesian Search\nAlgorithm options:\nMax parent count: 3\nInitial link probability: 0.1\nPrior link probability: 0.001\nBDeu sample size: 50\nTime limit (seconds): 60\nRandom Seed: 0\nScore by accuracy (10-fold), class variable: alvo_sucesso_ame_6m\n\nNo background knowledge\n\nBest accuracy in iteration 80: 0.588573 (5120/8699)\nEM Log Likelihood: -56247.2</caption>
+				<font color="000000" name="Arial" size="8" />
+				<position>10 140 341 392</position>
+			</textbox>
+		</genie>
+	</extensions>
+</smile>

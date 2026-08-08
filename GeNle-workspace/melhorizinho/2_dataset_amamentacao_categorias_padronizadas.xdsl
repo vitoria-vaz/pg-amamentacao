@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This network was created in GeNIe Academic, which can be used for academic teaching and research purposes only -->
+<smile version="1.0" id="dataset_amamentacao_categorias_padronizadas" numsamples="10000" discsamples="10000">
+	<nodes>
+		<cpt id="nivel_inseguranca_alimentar">
+			<state id="inseguranca_grave" />
+			<state id="inseguranca_leve" />
+			<state id="inseguranca_moderada" />
+			<state id="seguranca" />
+			<probabilities>0.04644211978388321 0.367628463041729 0.06288079089550523 0.5230486262788826</probabilities>
+		</cpt>
+		<cpt id="faixa_renda_familiar">
+			<state id="x_1000" />
+			<state id="x1000_a___2000" />
+			<state id="x2000_a___3000" />
+			<state id="x3000_a___5000" />
+			<state id="x5000" />
+			<state id="Sem_renda" />
+			<parents>nivel_inseguranca_alimentar</parents>
+			<probabilities>0.7227722772277227 0.2153465346534653 0.02475247524752475 0.009900990099009901 0.004950495049504951 0.02227722772277228 0.3373983739837398 0.3783614759224515 0.1585365853658537 0.07661038148843027 0.03627267041901188 0.01282051282051282 0.5941499085923218 0.3016453382084095 0.06215722120658135 0.007312614259597806 0.009140767824497258 0.02559414990859232 0.1995604395604396 0.3883516483516484 0.1958241758241758 0.1393406593406593 0.06967032967032967 0.007252747252747252</probabilities>
+		</cpt>
+		<cpt id="busca_informacao_aleitamento">
+			<state id="mais_ou_menos" />
+			<state id="muito" />
+			<state id="nao" />
+			<state id="nao_sabenao_quis_responder" />
+			<state id="pouco" />
+			<parents>faixa_renda_familiar</parents>
+			<probabilities>0.07373271889400922 0.09831029185867896 0.7346390168970814 0.003456221198156682 0.08986175115207373 0.08237844533911427 0.1365747909569526 0.6630535769588107 0.002787240631774543 0.1152059461133478 0.1081830790568655 0.1920943134535368 0.579750346740638 0.006934812760055479 0.1130374479889043 0.1059751972942503 0.2514092446448704 0.4859075535512965 0.005636978579481398 0.1510710259301015 0.1431818181818182 0.3840909090909091 0.3659090909090909 0.006818181818181818 0.09999999999999999 0.02061855670103093 0.1030927835051546 0.7835051546391752 0.01030927835051546 0.08247422680412371</probabilities>
+		</cpt>
+		<cpt id="qtd_filhos_vivos">
+			<state id="multipara_2_ou_mais" />
+			<state id="primipara_1" />
+			<parents>busca_informacao_aleitamento</parents>
+			<probabilities>0.5407503234152653 0.4592496765847348 0.46875 0.53125 0.6561712846347607 0.3438287153652393 0.6216216216216217 0.3783783783783784 0.5612565445026179 0.4387434554973823</probabilities>
+		</cpt>
+		<cpt id="faixa_etaria_mae">
+			<state id="adolescente" />
+			<state id="adulta" />
+			<state id="jovem_adulta" />
+			<state id="maternidade_tardia" />
+			<parents>faixa_renda_familiar qtd_filhos_vivos</parents>
+			<probabilities>0.02399520095980804 0.2441511697660468 0.4835032993401319 0.2483503299340132 0.2315901814300961 0.09071504802561367 0.6264674493062967 0.0512273212379936 0.01430761369443025 0.2595809913132346 0.42769545222279 0.2984159427695453 0.1690251572327044 0.1312893081761006 0.6352201257861636 0.06446540880503145 0.005973715651135005 0.2712066905615292 0.3667861409796894 0.3560334528076463 0.1173553719008264 0.1619834710743802 0.596694214876033 0.1239669421487603 0.0004734848484848485 0.3072916666666667 0.2523674242424243 0.4398674242424243 0.09166666666666667 0.2444444444444445 0.5277777777777778 0.1361111111111111 0.001126126126126126 0.2984234234234234 0.1858108108108108 0.5146396396396397 0.0410958904109589 0.2876712328767123 0.3926940639269406 0.2785388127853881 0.05 0.1833333333333333 0.5166666666666666 0.25 0.2972972972972973 0.1081081081081081 0.4864864864864865 0.1081081081081081</probabilities>
+		</cpt>
+		<cpt id="alvo_sucesso_ame_6m">
+			<state id="desmame_precoce___6m" />
+			<state id="sucesso_ame_6m_" />
+			<parents>faixa_etaria_mae</parents>
+			<probabilities>0.7009493670886076 0.2990506329113924 0.5402969247083775 0.4597030752916225 0.5876337693222354 0.4123662306777646 0.5708502024291499 0.4291497975708502</probabilities>
+		</cpt>
+		<cpt id="usou_mamadeira">
+			<state id="nao" />
+			<state id="sim" />
+			<parents>busca_informacao_aleitamento alvo_sucesso_ame_6m</parents>
+			<probabilities>0.8253968253968255 0.1746031746031746 0.9036144578313253 0.0963855421686747 0.8013245033112583 0.1986754966887417 0.8792270531400966 0.1207729468599034 0.8821743091406014 0.1178256908593987 0.9350993377483444 0.06490066225165562 0.9333333333333333 0.06666666666666667 0.9782608695652174 0.02173913043478261 0.8635547576301617 0.1364452423698384 0.9296482412060302 0.07035175879396985</probabilities>
+		</cpt>
+		<cpt id="recebeu_outro_leite">
+			<state id="nao" />
+			<state id="nao_sabenao_quis_responder" />
+			<state id="sim" />
+			<parents>usou_mamadeira busca_informacao_aleitamento</parents>
+			<probabilities>0.8343373493975904 0.009036144578313254 0.1566265060240964 0.7793223284100782 0.001737619461337967 0.2189400521285838 0.8333665140354369 0.01015329484371889 0.1564801911208441 0.75 0.2222222222222222 0.02777777777777778 0.8155111633372503 0.008225616921269096 0.1762632197414806 0.6146788990825689 0.009174311926605505 0.3761467889908257 0.6533333333333333 0.008888888888888889 0.3377777777777778 0.691588785046729 0.009345794392523366 0.2990654205607477 0.1666666666666667 0.6666666666666667 0.1666666666666667 0.6923076923076923 0.009615384615384616 0.2980769230769231</probabilities>
+		</cpt>
+		<cpt id="tempo_ate_primeira_mamada">
+			<state id="x_1_hora" />
+			<state id="x1_a___24_horas" />
+			<state id="x24_horas" />
+			<parents>recebeu_outro_leite</parents>
+			<probabilities>0.7342457941260337 0.2487881380096949 0.01696606786427146 0.2619047619047619 0.6309523809523809 0.1071428571428571 0.5103060587133041 0.358525921299188 0.1311680199875078</probabilities>
+		</cpt>
+		<cpt id="tipo_parto">
+			<state id="cesariana_agendada_eletiva" />
+			<state id="cesariana_de_urgencia_nao_agendada" />
+			<state id="normal" />
+			<parents>tempo_ate_primeira_mamada faixa_etaria_mae</parents>
+			<probabilities>0.07415730337078652 0.1393258426966292 0.7865168539325843 0.2417138237671786 0.227162489894907 0.5311236863379143 0.1444031112614136 0.213053770713561 0.6425431180250254 0.2925925925925926 0.2222222222222222 0.4851851851851852 0.119496855345912 0.3459119496855346 0.5345911949685535 0.3379549393414211 0.3206239168110918 0.341421143847487 0.2530120481927711 0.3123262279888786 0.4346617238183503 0.421903052064632 0.3177737881508079 0.2603231597845602 0.01149425287356322 0.3218390804597701 0.6666666666666666 0.2083333333333333 0.4722222222222222 0.3194444444444444 0.08284023668639053 0.4201183431952663 0.4970414201183432 0.3043478260869565 0.463768115942029 0.2318840579710145</probabilities>
+		</cpt>
+		<cpt id="historico_uso_chupeta">
+			<state id="ja_usou_chupeta__mas_nao_usa_mais" />
+			<state id="nao_sabenao_quis_responder" />
+			<state id="nunca_usou_porque_nunca_foi_oferecido" />
+			<state id="recusou_o_uso_de_chupeta" />
+			<state id="usa_chupeta" />
+			<parents>usou_mamadeira alvo_sucesso_ame_6m</parents>
+			<probabilities>0.1794460975051499 0.0009155413138017853 0.1675440604257267 0.3756008239871824 0.2764934767681392 0.1284266984505363 0.002383790226460071 0.2678784266984505 0.451430274135876 0.149880810488677 0.2109826589595376 0.002890173410404624 0.09682080924855491 0.3265895953757225 0.3627167630057803 0.2092198581560284 0.003546099290780142 0.198581560283688 0.3475177304964539 0.2411347517730496</probabilities>
+		</cpt>
+		<cpt id="raca_cor_mae">
+			<state id="amarela" />
+			<state id="branca" />
+			<state id="indigena" />
+			<state id="parda" />
+			<state id="preta" />
+			<parents>faixa_renda_familiar</parents>
+			<probabilities>0.006528417818740399 0.2108294930875576 0.006528417818740399 0.6259600614439325 0.1501536098310292 0.006503561474140601 0.2842985444410034 0.003406627438835553 0.5710746361102509 0.1347166305357696 0.006934812760055479 0.3869625520110957 0.003467406380027739 0.5 0.1026352288488211 0.006764374295377677 0.4994363021420518 0.00112739571589628 0.4069898534385569 0.08568207440811725 0.00909090909090909 0.5227272727272727 0.002272727272727273 0.3954545454545454 0.07045454545454545 0.002040816326530612 0.1857142857142857 0.002040816326530612 0.6857142857142857 0.1244897959183673</probabilities>
+		</cpt>
+	</nodes>
+	<extensions>
+		<genie version="1.0" app="GeNIe 5.0.6522.0 ACADEMIC" name="dataset_amamentacao_categorias_padronizadas">
+			<node id="recebeu_outro_leite">
+				<name>recebeu_outro_leite</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>661 10 733 58</position>
+			</node>
+			<node id="usou_mamadeira">
+				<name>usou_mamadeira</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>568 10 640 58</position>
+			</node>
+			<node id="busca_informacao_aleitamento">
+				<name>busca_informacao_aleitamento</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>196 10 268 58</position>
+			</node>
+			<node id="tipo_parto">
+				<name>tipo_parto</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>847 10 919 58</position>
+			</node>
+			<node id="historico_uso_chupeta">
+				<name>historico_uso_chupeta</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>623 94 695 142</position>
+			</node>
+			<node id="faixa_renda_familiar">
+				<name>faixa_renda_familiar</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>103 10 175 58</position>
+			</node>
+			<node id="nivel_inseguranca_alimentar">
+				<name>nivel_inseguranca_alimentar</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>10 10 82 58</position>
+			</node>
+			<node id="tempo_ate_primeira_mamada">
+				<name>tempo_ate_primeira_mamada</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>754 10 826 58</position>
+			</node>
+			<node id="raca_cor_mae">
+				<name>raca_cor_mae</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>196 72 268 120</position>
+			</node>
+			<node id="faixa_etaria_mae">
+				<name>faixa_etaria_mae</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>382 10 454 58</position>
+			</node>
+			<node id="qtd_filhos_vivos">
+				<name>qtd_filhos_vivos</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>289 10 361 58</position>
+			</node>
+			<node id="alvo_sucesso_ame_6m">
+				<name>alvo_sucesso_ame_6m</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>475 10 547 58</position>
+			</node>
+			<textbox>
+				<caption>Input file: dataset_amamentacao_categorias_padronizadas.csv\nData rows: 8699\nElapsed time: 59.313s\n\nLearning algorithm: Bayesian Search\nAlgorithm options:\nMax parent count: 4\nInitial link probability: 0.1\nPrior link probability: 0.001\nBDeu sample size: 50\nTime limit (seconds): 60\nRandom Seed: 42\nScore by accuracy (10-fold), class variable: alvo_sucesso_ame_6m\n\nNo background knowledge\n\nBest accuracy in iteration 306: 0.606966 (5280/8699)\nEM Log Likelihood: -93343.5</caption>
+				<font color="000000" name="Arial" size="8" />
+				<position>10 140 341 392</position>
+			</textbox>
+		</genie>
+	</extensions>
+</smile>
