@@ -13,7 +13,7 @@ input_base_dirs = ['selecao_dados/qtde_atributos_10/', 'selecao_dados/qtde_atrib
 output_dir = 'interpretacao/'
 os.makedirs(output_dir, exist_ok=True)
 
-# 2. Instanciação dos algoritmos de aprendizado de máquina
+# 2. Instanciação dos algoritmos
 # Fixamos o random_state para garantir a reprodutibilidade dos experimentos
 modelos = {
     'Decision Tree': DecisionTreeClassifier(random_state=42),
@@ -26,6 +26,7 @@ lista_resultados = []
 lista_matrizes_confusao = [] # Nova lista para armazenar os dados das matrizes
 
 # Instanciar LabelEncoder para transformar a classe alvo categórica em binária (0 e 1)
+# O encoder mapeará alfabeticamente: 0 = 'desmame_precoce_<_6m', 1 = 'sucesso_ame_6m+'
 le = LabelEncoder()
 
 # 3. Iteração sobre as pastas de 10 e 15 atributos
@@ -58,18 +59,18 @@ for base_dir in input_base_dirs:
         X_treino_encoded = pd.get_dummies(X_treino)
         X_teste_encoded = pd.get_dummies(X_teste)
         
-        # Define os caracteres que dão problema e substitui por underline (_)
+        # Define os caracteres que dão problema e substitui por underline (_) para o XGBoost
         caracteres_proibidos = r'[><=\+\[\]]'
 
         X_treino_encoded.columns = X_treino_encoded.columns.str.replace(caracteres_proibidos, '_', regex=True)
         X_teste_encoded.columns = X_teste_encoded.columns.str.replace(caracteres_proibidos, '_', regex=True)
         
-        # Alinha as colunas de treino e teste.
+        # Alinha as colunas de treino e teste
         X_treino_encoded, X_teste_encoded = X_treino_encoded.align(
             X_teste_encoded, join='left', axis=1, fill_value=0
         )
         
-        # Codificação Numérica da Variável Alvo para o XGBoost
+        # Codificação Numérica da Variável Alvo 
         y_treino_enc = le.fit_transform(y_treino)
         y_teste_enc = le.transform(y_teste)
         
@@ -105,15 +106,15 @@ for base_dir in input_base_dirs:
                 'AUC-ROC': round(auc_roc, 4)
             })
 
-            # 2. Armazenar as matrizes de confusão na nova lista
+            # 2. Armazenar as matrizes de confusão na nova lista (com nomes explicativos)
             lista_matrizes_confusao.append({
                 'Quantidade Atributos': qtde_atributos,
                 'Coleção': colecao,
                 'Algoritmo': nome_modelo,
-                'Verdadeiros Negativos (VN)': tn,
-                'Falsos Positivos (FP)': fp,
-                'Falsos Negativos (FN)': fn,
-                'Verdadeiros Positivos (VP)': tp
+                'Verdadeiros Negativos (VN) [Real: Desmame, Previsto: Desmame]': tn,
+                'Falsos Positivos (FP) [Real: Desmame, Previsto: Sucesso]': fp,
+                'Falsos Negativos (FN) [Real: Sucesso, Previsto: Desmame]': fn,
+                'Verdadeiros Positivos (VP) [Real: Sucesso, Previsto: Sucesso]': tp
             })
 
 # 6. Compilação e Exportação
