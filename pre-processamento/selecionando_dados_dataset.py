@@ -6,8 +6,8 @@ from sklearn.model_selection import train_test_split
 df = pd.read_csv('dataset/dataset_pos_processamento.csv')
 
 # 2. Separar todos os atributos (X) e a variável alvo (y)
-X = df.drop('alvo', axis=1)
-y = df['alvo']
+X = df.drop('alvo_sucesso_ame_6m', axis=1)
+y = df['alvo_sucesso_ame_6m']
 
 # 3. Divisão estratificada global (80% treino, 20% teste)
 # É fundamental fazer o split ANTES de filtrar as colunas.
