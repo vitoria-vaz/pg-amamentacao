@@ -4,8 +4,8 @@ import matplotlib.pyplot as plt
 # ==========================================
 # 1. CONFIGURAÇÕES E CAMINHOS (Constantes)
 # ==========================================
-CAMINHO_ENTRADA = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\dataset\dataset_amamentacao_filtrado.csv'
-CAMINHO_ENTRADA2 = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\dataset\dataset_amamentacao.csv'
+CAMINHO_ENTRADA = 'selecao_limpeza/dataset_amamentacao_filtrado.csv'
+CAMINHO_ENTRADA2 = 'selecao_limpeza/dataset_amamentacao.csv'
 
 # Nomes dos arquivos de imagem gerados
 CAMINHO_GRAFICO_NULOS_TODOS = 'contagem_valores_nulos_todos.jpg'

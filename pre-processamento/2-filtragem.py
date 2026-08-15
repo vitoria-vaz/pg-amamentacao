@@ -3,8 +3,8 @@ import pandas as pd
 # ==========================================
 # 1. CONFIGURAÇÕES E CAMINHOS (Constantes)
 # ==========================================
-CAMINHO_ENTRADA = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\dataset\dataset_amamentacao_eng.csv'
-CAMINHO_SAIDA   = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\dataset\dataset_amamentacao_filtrado.csv'
+CAMINHO_ENTRADA = 'selecao_limpeza/dataset_amamentacao_eng.csv'
+CAMINHO_SAIDA   = 'selecao_limpeza/dataset_amamentacao_filtrado.csv'
 
 ATRIBUTOS_PARA_EXCLUIR = [
     'tempo_amament_meses', 'b05a_idade_em_meses', 'id_anon', 'k28_rec', 'b02_sexo', 'idade_filho', 'amament_cat',

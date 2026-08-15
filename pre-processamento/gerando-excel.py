@@ -3,7 +3,7 @@ import openpyxl
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 
-CAMINHO_ENTRADA = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\dataset_amamentacao_renomeado.csv'
+CAMINHO_ENTRADA = 'selecao_limpeza/dataset_amamentacao_renomeado.csv'
 
 # 1. Carregar os dados prontos
 df = pd.read_csv(CAMINHO_ENTRADA, encoding='utf-8')
@@ -212,6 +212,6 @@ for c_idx in range(1, len(headers_data) + 1):
     ws_data.column_dimensions[col_letter].width = 24
 
 # Salvar o arquivo final estruturado
-nome_saida_excel = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\dataset\dataset_dicionario_amamentacao_pronto.xlsx'
+nome_saida_excel = 'selecao_limpeza/dataset_dicionario_amamentacao_pronto.xlsx'
 wb.save(nome_saida_excel)
 print(f"✅ Sucesso: O arquivo {nome_saida_excel} gerado com as observações de metadados!")

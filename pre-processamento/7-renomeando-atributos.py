@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Substitua pelo caminho onde seu dataset está salvo
-caminho = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\dataset\dataset_amamentacao_pronto.csv'
+caminho = 'selecao_limpeza/mice/dataset_amamentacao_pronto.csv'
 df = pd.read_csv(caminho)
 
 # Dicionário de mapeamento (De -> Para)

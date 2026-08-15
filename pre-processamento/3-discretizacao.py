@@ -3,8 +3,8 @@ import pandas as pd
 # ==========================================
 # 1. CONFIGURAÇÕES E CAMINHOS (Constantes)
 # ==========================================
-CAMINHO_ENTRADA = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\dataset\dataset_amamentacao_filtrado.csv'
-CAMINHO_SAIDA   = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\dataset\dataset_amamentacao_discretizado.csv'
+CAMINHO_ENTRADA = 'selecao_limpeza/dataset_amamentacao_filtrado.csv'
+CAMINHO_SAIDA   = 'selecao_limpeza/dataset_amamentacao_discretizado.csv'
 
 df = pd.read_csv(CAMINHO_ENTRADA, encoding='utf-8')
 

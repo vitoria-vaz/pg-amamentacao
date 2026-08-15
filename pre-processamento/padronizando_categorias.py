@@ -2,8 +2,8 @@ import pandas as pd
 import unicodedata
 import re
 
-caminho = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\dataset_amamentacao_renomeado.csv'
-arquivo_saida = r"C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\dataset\dataset_amamentacao_categorias_padronizadas.csv"
+caminho = 'dataset_amamentacao_renomeado.csv'
+arquivo_saida = "selecao_limpeza/dataset_amamentacao_categorias_padronizadas.csv"
 
 def padronizar_categoria(texto):
     """
@@ -29,11 +29,11 @@ df = pd.read_csv(caminho)
 # 1. Mapeamento Explicito para a Faixa de Renda
 # Substitua as chaves pelos valores brutos exatos que aparecem no seu CSV
 mapeamento_renda = {
-    'Até R$ 1.000,00' : '<=1000',
-    'De R$ 1.001,00 até R$ 2.000,00' : '>1000_a_<=2000',
-    'De R$ 2.001,00 até R$ 3.000,00' : '>2000_a_<=3000',
-    'De R$ 3.001,00 até R$ 5.000,00' : '>3000_a_<=5000',
-    'R$ 5.001,00 ou mais' : '>5000',
+    'Até R$ 1.000,00' : 'ate_1000',
+    'De R$ 1.001,00 até R$ 2.000,00' : '1000_a_2000',
+    'De R$ 2.001,00 até R$ 3.000,00' : '2000_a_3000',
+    'De R$ 3.001,00 até R$ 5.000,00' : '3000_a_5000',
+    'R$ 5.001,00 ou mais' : 'maior_5000',
     'Sem renda' : 'Sem_renda',
 }
 

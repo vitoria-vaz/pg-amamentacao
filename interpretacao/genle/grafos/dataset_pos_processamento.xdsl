@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This network was created in GeNIe Academic, which can be used for academic teaching and research purposes only -->
+<smile version="1.0" id="dataset_pos_processamento" numsamples="10000" discsamples="10000">
+	<nodes>
+		<cpt id="usou_bico_artificial">
+			<state id="nao" />
+			<state id="sim" />
+			<probabilities>0.9280377054833889 0.07196229451661111</probabilities>
+		</cpt>
+		<cpt id="oferta_outros_liquidos">
+			<state id="desconhecido" />
+			<state id="nao" />
+			<state id="sim" />
+			<parents>usou_bico_artificial</parents>
+			<probabilities>0.009166356992443949 0.8737767868202652 0.117056856187291 0.01118210862619808 0.7460063897763578 0.2428115015974441</probabilities>
+		</cpt>
+		<cpt id="recebeu_outro_leite">
+			<state id="nao" />
+			<state id="nao_sabenao_quis_responder" />
+			<state id="sim" />
+			<parents>oferta_outros_liquidos</parents>
+			<probabilities>0.382716049382716 0.4567901234567901 0.1604938271604938 0.8961574258742188 0.005717324823826618 0.09812524930195451 0.2215132178669098 0.003646308113035551 0.7748404740200546</probabilities>
+		</cpt>
+		<cpt id="usou_bomba_extracao">
+			<state id="nao" />
+			<state id="sim" />
+			<parents>usou_bico_artificial</parents>
+			<probabilities>0.8049052396878484 0.1950947603121516 0.487220447284345 0.5127795527156549</probabilities>
+		</cpt>
+		<cpt id="faixa_etaria_mae">
+			<state id="adolescente" />
+			<state id="adulta" />
+			<state id="jovem_adulta" />
+			<state id="maternidade_tardia" />
+			<probabilities>0.072652028968847 0.2168065294861478 0.483388895275319 0.2271525462696862</probabilities>
+		</cpt>
+		<cpt id="alvo_sucesso_ame_6m">
+			<state id="desmame_precoce___6m" />
+			<state id="sucesso_ame_6m_" />
+			<parents>faixa_etaria_mae</parents>
+			<probabilities>0.7009493670886076 0.2990506329113924 0.5402969247083775 0.4597030752916225 0.5876337693222354 0.4123662306777646 0.5708502024291499 0.4291497975708502</probabilities>
+		</cpt>
+		<cpt id="usou_mamadeira">
+			<state id="nao" />
+			<state id="sim" />
+			<parents>usou_bomba_extracao alvo_sucesso_ame_6m</parents>
+			<probabilities>0.9155509783728115 0.08444902162718847 0.9527235354573484 0.04727646454265159 0.6907391673746814 0.3092608326253186 0.799721835883171 0.2002781641168289</probabilities>
+		</cpt>
+		<cpt id="usou_sondinha_relactacao">
+			<state id="nao" />
+			<state id="sim" />
+			<parents>usou_mamadeira</parents>
+			<probabilities>0.9953398058252426 0.004660194174757281 0.9620123203285421 0.03798767967145791</probabilities>
+		</cpt>
+		<cpt id="zona_residencial">
+			<state id="rural" />
+			<state id="urbano" />
+			<parents>oferta_outros_liquidos</parents>
+			<probabilities>0.03703703703703703 0.9629629629629629 0.02260337721047733 0.9773966227895227 0.02005469462169553 0.9799453053783045</probabilities>
+		</cpt>
+		<cpt id="regiao_residencia">
+			<state id="centro_oeste" />
+			<state id="nordeste" />
+			<state id="norte" />
+			<state id="sudeste" />
+			<state id="sul" />
+			<parents>usou_bico_artificial zona_residencial</parents>
+			<probabilities>0.1944444444444444 0.2888888888888889 0.1555555555555556 0.08888888888888889 0.2722222222222223 0.2172811351830736 0.1923223109083999 0.195996452552895 0.214873938933232 0.1795261624223996 0.075 0.0125 0.0125 0.1375 0.7625 0.1702127659574468 0.1227495908346972 0.06546644844517185 0.2765957446808511 0.3649754500818331</probabilities>
+		</cpt>
+		<cpt id="historico_uso_chupeta">
+			<state id="ja_usou_chupeta__mas_nao_usa_mais" />
+			<state id="nao_sabenao_quis_responder" />
+			<state id="nunca_usou_porque_nunca_foi_oferecido" />
+			<state id="recusou_o_uso_de_chupeta" />
+			<state id="usa_chupeta" />
+			<parents>regiao_residencia alvo_sucesso_ame_6m</parents>
+			<probabilities>0.2061010486177312 0.0001906577693040992 0.1584366062917064 0.4215443279313632 0.2137273593898951 0.1339108910891089 0.0002475247524752475 0.2440594059405941 0.5002475247524752 0.1215346534653465 0.1723484848484849 0.003787878787878788 0.1553030303030303 0.3617424242424243 0.3068181818181818 0.1138983050847458 0.0003389830508474576 0.2715254237288136 0.4986440677966101 0.115593220338983 0.173655323819978 0.0002195389681668496 0.2054884742041712 0.483205268935236 0.1374313940724479 0.1262411347517731 0.001418439716312057 0.3333333333333334 0.4836879432624114 0.05531914893617022 0.199821587867975 0.001784121320249777 0.1409455842997324 0.2872435325602141 0.3702051739518287 0.1614173228346457 0.003937007874015748 0.2427821522309711 0.379265091863517 0.2125984251968504 0.1620280474649406 0.0002157497303128371 0.1339805825242718 0.303344120819849 0.4004314994606256 0.1329032258064516 0.006451612903225806 0.2296774193548387 0.367741935483871 0.2632258064516129</probabilities>
+		</cpt>
+	</nodes>
+	<extensions>
+		<genie version="1.0" app="GeNIe 5.0.6522.0 ACADEMIC" name="dataset_pos_processamento">
+			<node id="recebeu_outro_leite">
+				<name>recebeu_outro_leite</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>196 10 268 58</position>
+			</node>
+			<node id="oferta_outros_liquidos">
+				<name>oferta_outros_liquidos</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>103 10 175 58</position>
+			</node>
+			<node id="usou_bico_artificial">
+				<name>usou_bico_artificial</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>10 10 82 58</position>
+			</node>
+			<node id="usou_bomba_extracao">
+				<name>usou_bomba_extracao</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>103 72 175 120</position>
+			</node>
+			<node id="usou_mamadeira">
+				<name>usou_mamadeira</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>196 72 268 120</position>
+			</node>
+			<node id="usou_sondinha_relactacao">
+				<name>usou_sondinha_relactacao</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>289 10 361 58</position>
+			</node>
+			<node id="regiao_residencia">
+				<name>regiao_residencia</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>289 72 361 120</position>
+			</node>
+			<node id="zona_residencial">
+				<name>zona_residencial</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>196 134 268 182</position>
+			</node>
+			<node id="historico_uso_chupeta">
+				<name>historico_uso_chupeta</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>382 10 454 58</position>
+			</node>
+			<node id="faixa_etaria_mae">
+				<name>faixa_etaria_mae</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>10 72 82 120</position>
+			</node>
+			<node id="alvo_sucesso_ame_6m">
+				<name>alvo_sucesso_ame_6m</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>103 134 175 182</position>
+			</node>
+			<textbox>
+				<caption>Input file: dataset_pos_processamento.csv\nData rows: 8699\nElapsed time: 59.891s\n\nLearning algorithm: Bayesian Search\nAlgorithm options:\nMax parent count: 4\nInitial link probability: 0.1\nPrior link probability: 0.001\nBDeu sample size: 50\nTime limit (seconds): 60\nRandom Seed: 0\nScore by accuracy (4-fold), class variable: alvo_sucesso_ame_6m\n\nNo background knowledge\n\nBest accuracy in iteration 34: 0.607656 (5286/8699)\nEM Log Likelihood: -59312.5</caption>
+				<font color="000000" name="Arial" size="8" />
+				<position>10 202 335 454</position>
+			</textbox>
+		</genie>
+	</extensions>
+</smile>

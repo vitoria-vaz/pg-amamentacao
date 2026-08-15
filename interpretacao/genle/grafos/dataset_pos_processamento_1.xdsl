@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This network was created in GeNIe Academic, which can be used for academic teaching and research purposes only -->
+<smile version="1.0" id="dataset_pos_processamento" numsamples="10000" discsamples="10000">
+	<nodes>
+		<cpt id="usou_bomba_extracao">
+			<state id="nao" />
+			<state id="sim" />
+			<probabilities>0.782043913093459 0.217956086906541</probabilities>
+		</cpt>
+		<cpt id="usou_bico_artificial">
+			<state id="nao" />
+			<state id="sim" />
+			<parents>usou_bomba_extracao</parents>
+			<probabilities>0.9551668381596354 0.04483316184036455 0.8306962025316454 0.1693037974683544</probabilities>
+		</cpt>
+		<cpt id="usou_mamadeira">
+			<state id="nao" />
+			<state id="sim" />
+			<parents>usou_bico_artificial</parents>
+			<probabilities>0.9035055122011644 0.09649448779883563 0.6884984025559105 0.3115015974440895</probabilities>
+		</cpt>
+		<cpt id="zona_residencial">
+			<state id="rural" />
+			<state id="urbano" />
+			<probabilities>0.0224163696976664 0.9775836303023336</probabilities>
+		</cpt>
+		<cpt id="alvo_sucesso_ame_6m">
+			<state id="desmame_precoce___6m" />
+			<state id="sucesso_ame_6m_" />
+			<parents>usou_bico_artificial usou_mamadeira zona_residencial</parents>
+			<probabilities>0.6610169491525424 0.3389830508474576 0.5576787972460306 0.4423212027539694 0.875 0.125 0.7023195876288659 0.297680412371134 0.8333333333333333 0.1666666666666667 0.6515513126491647 0.3484486873508353 0.6666666666666666 0.3333333333333333 0.7395833333333333 0.2604166666666666</probabilities>
+		</cpt>
+		<cpt id="historico_uso_chupeta">
+			<state id="ja_usou_chupeta__mas_nao_usa_mais" />
+			<state id="nao_sabenao_quis_responder" />
+			<state id="nunca_usou_porque_nunca_foi_oferecido" />
+			<state id="recusou_o_uso_de_chupeta" />
+			<state id="usa_chupeta" />
+			<parents>alvo_sucesso_ame_6m</parents>
+			<probabilities>0.1837581505631298 0.001185536455245999 0.1578739379569255 0.3688994269907133 0.2882829480339854 0.1346893897746014 0.002473886750962067 0.2625068719076415 0.4433754810335349 0.15695437053326</probabilities>
+		</cpt>
+		<cpt id="oferta_outros_liquidos">
+			<state id="desconhecido" />
+			<state id="nao" />
+			<state id="sim" />
+			<parents>historico_uso_chupeta</parents>
+			<probabilities>0.01267605633802817 0.8323943661971831 0.1549295774647887 0.06666666666666667 0.8666666666666667 0.06666666666666667 0.007411630558722919 0.8842645381984037 0.1083238312428734 0.009770114942528735 0.8804597701149425 0.1097701149425287 0.007389162561576354 0.8428571428571427 0.1497536945812808</probabilities>
+		</cpt>
+		<cpt id="recebeu_outro_leite">
+			<state id="nao" />
+			<state id="nao_sabenao_quis_responder" />
+			<state id="sim" />
+			<parents>oferta_outros_liquidos</parents>
+			<probabilities>0.382716049382716 0.4567901234567901 0.1604938271604938 0.8961574258742188 0.005717324823826618 0.09812524930195451 0.2215132178669098 0.003646308113035551 0.7748404740200546</probabilities>
+		</cpt>
+		<cpt id="reside_com_parceiro">
+			<state id="nao" />
+			<state id="sim" />
+			<parents>recebeu_outro_leite</parents>
+			<probabilities>0.2567721699458226 0.7432278300541774 0.2738095238095238 0.7261904761904762 0.2535915053091817 0.7464084946908182</probabilities>
+		</cpt>
+		<cpt id="nivel_inseguranca_alimentar">
+			<state id="inseguranca_grave" />
+			<state id="inseguranca_leve" />
+			<state id="inseguranca_moderada" />
+			<state id="seguranca" />
+			<parents>usou_bomba_extracao</parents>
+			<probabilities>0.05071292077024842 0.3519035719535499 0.06438336028222842 0.5330001469939732 0.03111814345991561 0.4240506329113924 0.05748945147679324 0.4873417721518987</probabilities>
+		</cpt>
+		<cpt id="inicio_prenatal">
+			<state id="x2_semanas" />
+			<state id="x12_semanas" />
+			<probabilities>0.2464651109322911 0.7535348890677089</probabilities>
+		</cpt>
+	</nodes>
+	<extensions>
+		<genie version="1.0" app="GeNIe 5.0.6522.0 ACADEMIC" name="dataset_pos_processamento">
+			<node id="recebeu_outro_leite">
+				<name>recebeu_outro_leite</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>568 10 640 58</position>
+			</node>
+			<node id="oferta_outros_liquidos">
+				<name>oferta_outros_liquidos</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>475 10 547 58</position>
+			</node>
+			<node id="usou_bico_artificial">
+				<name>usou_bico_artificial</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>103 10 175 58</position>
+			</node>
+			<node id="usou_bomba_extracao">
+				<name>usou_bomba_extracao</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>10 10 82 58</position>
+			</node>
+			<node id="usou_mamadeira">
+				<name>usou_mamadeira</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>196 10 268 58</position>
+			</node>
+			<node id="zona_residencial">
+				<name>zona_residencial</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>286 79 358 127</position>
+			</node>
+			<node id="historico_uso_chupeta">
+				<name>historico_uso_chupeta</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>382 10 454 58</position>
+			</node>
+			<node id="reside_com_parceiro">
+				<name>reside_com_parceiro</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>661 10 733 58</position>
+			</node>
+			<node id="nivel_inseguranca_alimentar">
+				<name>nivel_inseguranca_alimentar</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>40 79 112 127</position>
+			</node>
+			<node id="inicio_prenatal">
+				<name>inicio_prenatal</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>63 146 135 194</position>
+			</node>
+			<node id="alvo_sucesso_ame_6m">
+				<name>alvo_sucesso_ame_6m</name>
+				<interior color="e5f6f7" />
+				<outline color="000080" />
+				<font color="000000" name="Arial" size="8" />
+				<position>289 10 361 58</position>
+			</node>
+			<textbox>
+				<caption>Input file: dataset_pos_processamento.csv\nData rows: 8699\nElapsed time: 59.594s\n\nLearning algorithm: Bayesian Search\nAlgorithm options:\nMax parent count: 4\nInitial link probability: 0.1\nPrior link probability: 0.001\nBDeu sample size: 50\nTime limit (seconds): 60\nRandom Seed: 0\nScore by accuracy (4-fold), class variable: alvo_sucesso_ame_6m\n\nNo background knowledge\n\nBest accuracy in iteration 6: 0.602828 (5244/8699)\nEM Log Likelihood: -53640.2</caption>
+				<font color="000000" name="Arial" size="8" />
+				<position>10 202 335 454</position>
+			</textbox>
+		</genie>
+	</extensions>
+</smile>

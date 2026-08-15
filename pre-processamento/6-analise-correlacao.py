@@ -7,7 +7,7 @@ import matplotlib.pyplot as plt
 # ==========================================
 # 1. CONFIGURAÇÕES E CAMINHOS (Constantes)
 # ==========================================
-CAMINHO_ENTRADA = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\dataset\dataset_amamentacao_pronto.csv'
+CAMINHO_ENTRADA = 'selecao_limpeza/dataset_amamentacao_pronto.csv'
 CAMINHO_GRAFICO_CALOR = 'mapa_calor_cramers_v.jpg'
 
 # ==========================================

@@ -5,8 +5,8 @@ import matplotlib.pyplot as plt
 # ==========================================
 # 1. CONFIGURAÇÕES E CAMINHOS (Constantes)
 # ==========================================
-CAMINHO_ENTRADA = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\dataset\dataset_amamentacao.csv'
-CAMINHO_SAIDA   = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\dataset\dataset_amamentacao_eng.csv'
+CAMINHO_ENTRADA = 'selecao_limpeza/dataset_amamentacao.csv'
+CAMINHO_SAIDA   = 'selecao_limpeza/dataset_amamentacao_eng.csv'
 DISTRIBUICAO_ALVO = 'distribuicao_alvo.jpg'
 
 # Carrega o dado bruto

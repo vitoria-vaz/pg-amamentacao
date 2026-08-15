@@ -7,10 +7,12 @@ import os
 # 1. CONFIGURAÇÕES E CAMINHOS
 # ==========================================
 # Lê a base FINAL, que passou por filtragem, discretização e imputação de nulos
-CAMINHO_ENTRADA = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\dataset\dataset_amamentacao_pronto.csv'
+CAMINHO_ENTRADA = 'selecao_limpeza/mice/dataset_amamentacao_pronto.csv'
+CAMINHO = 'selecao_limpeza/dataset_amamentacao_pronto.csv'
+
 
 # Cria uma pasta separada para os gráficos finais validados
-DIRETORIO_SAIDA = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\graficos_pos_imputacao'
+DIRETORIO_SAIDA = 'graficos_pos_imputacao/mice'
 
 if not os.path.exists(DIRETORIO_SAIDA):
     os.makedirs(DIRETORIO_SAIDA)

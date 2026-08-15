@@ -7,10 +7,10 @@ import os
 # 1. CONFIGURAÇÕES E CAMINHOS
 # ==========================================
 # Lê a base DISCRETIZADA (Antes do tratamento de nulos do Passo 4)
-CAMINHO_ENTRADA = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\dataset\dataset_amamentacao_discretizado.csv'
+CAMINHO_ENTRADA = 'selecao_limpeza/dataset_amamentacao_discretizado.csv'
 
 # Cria uma pasta separada para os gráficos de diagnóstico
-DIRETORIO_SAIDA = r'C:\Users\vitoria-vaz\estudos\UFU\projeto-graduacao\pg-amamentacao\graficos_pre_imputacao'
+DIRETORIO_SAIDA = 'graficos_pre_imputacao'
 
 if not os.path.exists(DIRETORIO_SAIDA):
     os.makedirs(DIRETORIO_SAIDA)
