@@ -50,7 +50,7 @@ def explorar_categorias(caminho_do_ficheiro, limite_categorias=30):
 # ÁREA DE EXECUÇÃO
 # ==========================================
 # Variáveis que podes (e deves) ajustar:
-NOME_DO_FICHEIRO = 'dataset_amamentacao_renomeado.csv' # <-- Substitui pelo nome real do teu ficheiro
+NOME_DO_FICHEIRO = 'dataset/dataset_pos_processamento_2.csv' # <-- Substitui pelo nome real do teu ficheiro
 LIMITE = 20 # <-- Altera este valor se quiseres ver colunas com mais ou menos categorias
 
 # Chamada da função para iniciar o programa
