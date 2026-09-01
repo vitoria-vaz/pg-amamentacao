@@ -9,7 +9,7 @@ CAMINHO_SAIDA   = 'selecao_limpeza/dataset_amamentacao_filtrado.csv'
 ATRIBUTOS_PARA_EXCLUIR = [
     'tempo_amament_meses', 'b05a_idade_em_meses', 'id_anon', 'k28_rec', 'b02_sexo', 'idade_filho', 'amament_cat',
     'k04_prenatal_semanas', 'h01_semanas_gravidez', 'k05_prenatal_consultas', 'inicio_precoce_amamentacao',
-    'k248_utilizou_nao', 'k249_utilizou_nao_sabe'
+    'k248_utilizou_nao', 'k249_utilizou_nao_sabe', 'k01_gestacoes', 'vd_ebia_escore', 'tempo_1a_amament'
 ]
 
 # ==========================================

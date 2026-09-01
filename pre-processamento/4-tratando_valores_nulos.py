@@ -11,8 +11,8 @@ from sklearn.impute import IterativeImputer
 # ==========================================
 # 1. CONFIGURAÇÕES E CAMINHOS
 # ==========================================
-CAMINHO_ENTRADA = 'selecao_limpeza/dataset_amamentacao_discretizado.csv'
-CAMINHO_SAIDA   = 'selecao_limpeza/mice/dataset_amamentacao_pronto.csv'
+CAMINHO_ENTRADA = 'selecao_limpeza/dataset_amamentacao_filtrado.csv'
+CAMINHO_SAIDA   = 'selecao_limpeza/mice/dataset_amamentacao_pronto_sem_discretizar.csv'
 
 df = pd.read_csv(CAMINHO_ENTRADA, encoding='utf-8')
 
@@ -20,7 +20,7 @@ df = pd.read_csv(CAMINHO_ENTRADA, encoding='utf-8')
 # 2. TRATAMENTO CRÍTICO
 # ==========================================
 # Mantemos a remoção de nulos na variável mais crítica do seu domínio
-df = df.dropna(subset=['idade_mae_cat'])
+df = df.dropna(subset=['bb04_idade_da_mae'])
 print(f"Instâncias com idade nula removidas. Linhas restantes: {len(df)}")
 
 # ==========================================
@@ -32,8 +32,8 @@ print("="*50)
 
 # Definimos todas as variáveis que farão parte do modelo (preditoras e alvos)
 cols_mice = [
-    'q07_renda_faixa', 'a00_regiao', 'idade_mae_cat', 
-    'filhos_vivos_cat', 'inic_prenat', 'num_consultas'
+    'q07_renda_faixa', 'a00_regiao', 'bb04_idade_da_mae', 
+    'k02_filhos_vivos', 'inic_prenat', 'num_consultas'
 ]
 
 # O Scikit-Learn exige dados numéricos. Usaremos o OrdinalEncoder.

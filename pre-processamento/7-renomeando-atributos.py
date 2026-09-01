@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Substitua pelo caminho onde seu dataset está salvo
-caminho = 'selecao_limpeza/mice/dataset_amamentacao_pronto.csv'
+caminho = 'selecao_limpeza/mice/dataset_amamentacao_pronto_sem_discretizar.csv'
 df = pd.read_csv(caminho)
 
 # Dicionário de mapeamento (De -> Para)
@@ -10,10 +10,10 @@ dicionario_renomeacao = {
     'a11_situacao': 'zona_residencial',
     'alvo_amamentacao': 'alvo_sucesso_ame_6m',
     'escolaridade_cat': 'escolaridade_mae',
-    'filhos_vivos_cat': 'qtd_filhos_vivos',
+    'k02_filhos_vivos': 'qtd_filhos_vivos',
     'h04_parto': 'tipo_parto',
     'h05_chupeta_usou': 'historico_uso_chupeta',
-    'idade_mae_cat': 'faixa_etaria_mae',
+    'bb04_idade_da_mae': 'idade_mae',
     'inic_prenat': 'inicio_prenatal',
     'j04_vive': 'reside_com_parceiro',
     'j06_ocupacao': 'situacao_laboral_mae',
@@ -41,6 +41,6 @@ dicionario_renomeacao = {
 df.rename(columns=dicionario_renomeacao, inplace=True)
 
 # Exportando a versão final
-df.to_csv('dataset_amamentacao_renomeado.csv', index=False, encoding='utf-8')
+df.to_csv('selecao_limpeza/dataset_amamentacao_renomeado.csv', index=False, encoding='utf-8')
 
 print("Colunas renomeadas com sucesso!")

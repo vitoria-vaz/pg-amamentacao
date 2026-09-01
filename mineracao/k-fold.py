@@ -25,7 +25,7 @@ from sklearn.metrics import accuracy_score, confusion_matrix, f1_score, roc_auc_
 # ==========================================
 # 1. CARREGAR E PREPARAR OS DADOS
 # ==========================================
-df = pd.read_csv('dataset/dataset_pos_processamento_2.csv')
+df = pd.read_csv('selecao_limpeza/dataset_amamentacao_categorias_padronizadas_sem_discretizar.csv')
 
 # Separar todos os atributos (X) e a variável alvo (y)
 X = df.drop('alvo_sucesso_ame_6m', axis=1)
@@ -40,18 +40,18 @@ print("Mapeamento da Variável Alvo:", dict(zip(le.classes_, le.transform(le.cla
 # 2. DICIONÁRIOS DE ATRIBUTOS
 # ==========================================
 colecao_10_atributos = {
-    "selecionado_por_especialistas" : ["situacao_laboral_mae", "faixa_renda_familiar", "nivel_inseguranca_alimentar", "zona_residencial", "escolaridade_mae", "faixa_etaria_mae", "tipo_parto", "tempo_ate_primeira_mamada", "oferta_outros_liquidos", "usou_mamadeira"],
+    "selecionado_por_especialistas" : ["situacao_laboral_mae", "faixa_renda_familiar", "nivel_inseguranca_alimentar", "zona_residencial", "escolaridade_mae", "idade_mae", "tipo_parto", "tempo_ate_primeira_mamada", "oferta_outros_liquidos", "usou_mamadeira"],
     "treino_e_teste_1" : ["historico_uso_chupeta", "usou_mamadeira", "oferta_outros_liquidos", "recebeu_outro_leite", "usou_bico_artificial", "nivel_inseguranca_alimentar", "usou_bomba_extracao", "inicio_prenatal", "reside_com_parceiro", "zona_residencial"],
-    "treino_e_teste_2" : ["historico_uso_chupeta", "usou_mamadeira", "oferta_outros_liquidos", "usou_bico_artificial", "recebeu_outro_leite", "zona_residencial", "usou_sondinha_relactacao", "faixa_etaria_mae", "usou_bomba_extracao", "regiao_residencia"],
-    "treino_e_teste_3" : ["historico_uso_chupeta", "usou_mamadeira", "oferta_outros_liquidos", "recebeu_outro_leite", "faixa_etaria_mae", "regiao_residencia", "usou_bico_artificial", "nivel_inseguranca_alimentar", "faixa_renda_familiar", "escolaridade_mae"],
+    "treino_e_teste_2" : ["historico_uso_chupeta", "usou_mamadeira", "oferta_outros_liquidos", "usou_bico_artificial", "recebeu_outro_leite", "zona_residencial", "usou_sondinha_relactacao", "idade_mae", "usou_bomba_extracao", "regiao_residencia"],
+    "treino_e_teste_3" : ["historico_uso_chupeta", "usou_mamadeira", "oferta_outros_liquidos", "recebeu_outro_leite", "idade_mae", "regiao_residencia", "usou_bico_artificial", "nivel_inseguranca_alimentar", "faixa_renda_familiar", "escolaridade_mae"],
     "treino_e_teste_4" : ["historico_uso_chupeta", "faixa_renda_familiar", "busca_informacao_aleitamento", "classificacao_peso_nascimento", "zona_residencial", "regiao_residencia", "usou_sondinha_relactacao", "usou_copinho", "qtd_filhos_vivos", "tipo_parto"],
     "treino_e_teste_5" : ["historico_uso_chupeta", "regiao_residencia", "usou_mamadeira", "busca_informacao_aleitamento", "oferta_outros_liquidos", "recebeu_outro_leite", "escolaridade_mae", "nivel_inseguranca_alimentar", "inicio_prenatal", "recebe_auxilio_governamental"]
 }
 
 colecao_15_atributos = {
-    "treino_e_teste_1" : ["historico_uso_chupeta", "usou_mamadeira", "oferta_outros_liquidos", "recebeu_outro_leite", "usou_bico_artificial", "nivel_inseguranca_alimentar", "usou_bomba_extracao", "inicio_prenatal", "reside_com_parceiro", "zona_residencial", "regiao_residencia", "recebe_auxilio_governamental", "busca_informacao_aleitamento", "tempo_ate_primeira_mamada", "faixa_etaria_mae"],
-    "treino_e_teste_2" : ["historico_uso_chupeta", "usou_mamadeira", "oferta_outros_liquidos", "usou_bico_artificial", "recebeu_outro_leite", "zona_residencial", "usou_sondinha_relactacao", "faixa_etaria_mae", "usou_bomba_extracao", "regiao_residencia", "nivel_inseguranca_alimentar", "inicio_prenatal", "escolaridade_mae", "tempo_ate_primeira_mamada", "faixa_consultas_prenatal"],
-    "treino_e_teste_3" : ["historico_uso_chupeta", "usou_mamadeira", "oferta_outros_liquidos", "recebeu_outro_leite", "faixa_etaria_mae", "regiao_residencia", "usou_bico_artificial", "nivel_inseguranca_alimentar", "faixa_renda_familiar", "escolaridade_mae", "usou_bomba_extracao", "busca_informacao_aleitamento", "tempo_ate_primeira_mamada", "raca_cor_mae", "inicio_prenatal"],
+    "treino_e_teste_1" : ["historico_uso_chupeta", "usou_mamadeira", "oferta_outros_liquidos", "recebeu_outro_leite", "usou_bico_artificial", "nivel_inseguranca_alimentar", "usou_bomba_extracao", "inicio_prenatal", "reside_com_parceiro", "zona_residencial", "regiao_residencia", "recebe_auxilio_governamental", "busca_informacao_aleitamento", "tempo_ate_primeira_mamada", "idade_mae"],
+    "treino_e_teste_2" : ["historico_uso_chupeta", "usou_mamadeira", "oferta_outros_liquidos", "usou_bico_artificial", "recebeu_outro_leite", "zona_residencial", "usou_sondinha_relactacao", "idade_mae", "usou_bomba_extracao", "regiao_residencia", "nivel_inseguranca_alimentar", "inicio_prenatal", "escolaridade_mae", "tempo_ate_primeira_mamada", "faixa_consultas_prenatal"],
+    "treino_e_teste_3" : ["historico_uso_chupeta", "usou_mamadeira", "oferta_outros_liquidos", "recebeu_outro_leite", "idade_mae", "regiao_residencia", "usou_bico_artificial", "nivel_inseguranca_alimentar", "faixa_renda_familiar", "escolaridade_mae", "usou_bomba_extracao", "busca_informacao_aleitamento", "tempo_ate_primeira_mamada", "raca_cor_mae", "inicio_prenatal"],
     "treino_e_teste_4" : ["historico_uso_chupeta", "faixa_renda_familiar", "busca_informacao_aleitamento", "classificacao_peso_nascimento", "zona_residencial", "regiao_residencia", "usou_sondinha_relactacao", "usou_copinho", "qtd_filhos_vivos", "tipo_parto", "usou_concha_amamentacao", "oferta_outros_liquidos", "usou_protetor_mamilo", "usou_bomba_extracao", "usou_bico_artificial"],
     "treino_e_teste_5" : ["historico_uso_chupeta", "regiao_residencia", "usou_mamadeira", "busca_informacao_aleitamento", "oferta_outros_liquidos", "recebeu_outro_leite", "escolaridade_mae", "nivel_inseguranca_alimentar", "inicio_prenatal", "recebe_auxilio_governamental", "raca_cor_mae", "usou_bico_artificial", "usou_bomba_extracao", "adequacao_peso_idade_gestacional", "faixa_renda_familiar"]
 }
@@ -62,7 +62,7 @@ colecao_todos_atributos = {
                               "regiao_residencia", "zona_residencial", "tipo_parto", "historico_uso_chupeta", "reside_com_parceiro", "situacao_laboral_mae", 
                               "realizou_prenatal", "recebe_auxilio_governamental", "faixa_renda_familiar", "nivel_inseguranca_alimentar", "tempo_ate_primeira_mamada", 
                               "classificacao_peso_nascimento", "inicio_prenatal", "faixa_consultas_prenatal", "adequacao_peso_idade_gestacional", 
-                              "escolaridade_mae", "raca_cor_mae", "faixa_etaria_mae", "qtd_filhos_vivos"] 
+                              "escolaridade_mae", "raca_cor_mae", "idade_mae", "qtd_filhos_vivos"] 
 } 
 
 # ==========================================
@@ -191,7 +191,7 @@ df_consolidado = df_consolidado.round(4)
 
 # Salvar as tabelas
 os.makedirs('interpretacao', exist_ok=True)
-nome_arquivo_excel = 'interpretacao/resultados_modelos_10fold.xlsx'
+nome_arquivo_excel = 'interpretacao/resultados_modelos_10fold_sem_discretizar.xlsx'
 
 with pd.ExcelWriter(nome_arquivo_excel) as writer:
     # Salvando a aba original de Métricas

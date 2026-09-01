@@ -2,8 +2,8 @@ import pandas as pd
 import unicodedata
 import re
 
-caminho = 'dataset_amamentacao_renomeado.csv'
-arquivo_saida = "selecao_limpeza/dataset_amamentacao_categorias_padronizadas.csv"
+caminho = 'selecao_limpeza/dataset_amamentacao_renomeado.csv'
+arquivo_saida = "selecao_limpeza/dataset_amamentacao_categorias_padronizadas_sem_discretizar.csv"
 
 def padronizar_categoria(texto):
     """
@@ -44,7 +44,7 @@ if 'faixa_renda_familiar' in df.columns:
 colunas_alvo = [
     'regiao_residencia', 'zona_residencial', 'alvo_sucesso_ame_6m',
     'escolaridade_mae', 'qtd_filhos_vivos', 'tipo_parto',
-    'historico_uso_chupeta', 'faixa_etaria_mae', 'inicio_prenatal',
+    'historico_uso_chupeta', 'idade_mae', 'inicio_prenatal',
     'reside_com_parceiro', 'situacao_laboral_mae', 'realizou_prenatal',
     'recebeu_outro_leite', 'oferta_outros_liquidos', 'usou_concha_amamentacao',
     'usou_protetor_mamilo', 'usou_bico_artificial', 'usou_bomba_extracao',
