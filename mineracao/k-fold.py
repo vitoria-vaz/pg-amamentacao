@@ -14,7 +14,7 @@ from sklearn.naive_bayes import GaussianNB
 from xgboost import XGBClassifier
 from sklearn.preprocessing import LabelEncoder
 
-# NOVOS IMPORTS: Ferramentas para codificação mais eficiente
+# Importando ferramentas para codificação mais eficiente
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
@@ -34,10 +34,13 @@ X = df.drop('alvo_sucesso_ame_6m', axis=1)
 le = LabelEncoder()
 y = pd.Series(le.fit_transform(df['alvo_sucesso_ame_6m']))
 
+print("Mapeamento da Variável Alvo:", dict(zip(le.classes_, le.transform(le.classes_))))
+
 # ==========================================
 # 2. DICIONÁRIOS DE ATRIBUTOS
 # ==========================================
 colecao_10_atributos = {
+    "selecionado_por_especialistas" : ["situacao_laboral_mae", "faixa_renda_familiar", "nivel_inseguranca_alimentar", "zona_residencial", "escolaridade_mae", "faixa_etaria_mae", "tipo_parto", "tempo_ate_primeira_mamada", "oferta_outros_liquidos", "usou_mamadeira"],
     "treino_e_teste_1" : ["historico_uso_chupeta", "usou_mamadeira", "oferta_outros_liquidos", "recebeu_outro_leite", "usou_bico_artificial", "nivel_inseguranca_alimentar", "usou_bomba_extracao", "inicio_prenatal", "reside_com_parceiro", "zona_residencial"],
     "treino_e_teste_2" : ["historico_uso_chupeta", "usou_mamadeira", "oferta_outros_liquidos", "usou_bico_artificial", "recebeu_outro_leite", "zona_residencial", "usou_sondinha_relactacao", "faixa_etaria_mae", "usou_bomba_extracao", "regiao_residencia"],
     "treino_e_teste_3" : ["historico_uso_chupeta", "usou_mamadeira", "oferta_outros_liquidos", "recebeu_outro_leite", "faixa_etaria_mae", "regiao_residencia", "usou_bico_artificial", "nivel_inseguranca_alimentar", "faixa_renda_familiar", "escolaridade_mae"],
@@ -69,7 +72,7 @@ modelos = {
     'Decision Tree': DecisionTreeClassifier(random_state=42),
     'Random Forest': RandomForestClassifier(random_state=42),
     'Naive Bayes': GaussianNB(),
-    'XGBoost': XGBClassifier(random_state=42, eval_metric='logloss') # Removi use_label_encoder (obsoleto em versões recentes)
+    'XGBoost': XGBClassifier(random_state=42, eval_metric='logloss')
 }
 
 skf = StratifiedKFold(n_splits=10, shuffle=True, random_state=42)
@@ -87,13 +90,10 @@ def avaliar_colecoes(dict_colecoes, qtde_atributos):
         # Filtra X apenas com os atributos da coleção atual
         X_subset = X[atributos]
         
-        # ADAPTAÇÃO: Identificar quais colunas são categóricas e quais são numéricas
-        # Isto previne que o codificador tente transformar números em categorias
+        # Identificar quais colunas são categóricas e quais são numéricas
         colunas_categoricas = X_subset.select_dtypes(include=['object', 'category']).columns.tolist()
-        colunas_numericas = X_subset.select_dtypes(exclude=['object', 'category']).columns.tolist()
         
         # Cria o transformador para as colunas categóricas
-        # handle_unknown='ignore' garante que se aparecer uma categoria nova no teste, não haverá erro
         pre_processador = ColumnTransformer(
             transformers=[
                 ('cat', OneHotEncoder(drop='first', handle_unknown='ignore', sparse_output=False), colunas_categoricas)
@@ -104,8 +104,6 @@ def avaliar_colecoes(dict_colecoes, qtde_atributos):
         for nome_modelo, modelo in modelos.items():
             
             # Cria a Linha de Montagem (Pipeline)
-            # 1º Passo: Aplica o One-Hot Encoding (pre_processador)
-            # 2º Passo: Aplica o Modelo de Machine Learning
             pipeline = Pipeline(steps=[
                 ('pre_processador', pre_processador),
                 ('modelo', modelo)
@@ -115,15 +113,13 @@ def avaliar_colecoes(dict_colecoes, qtde_atributos):
             y_preditos = []
             y_probabilidades = []
             
-            # Executa o 10-fold CV usando a base original (o pipeline faz as transformações!)
+            # Executa o 10-fold CV
             for train_index, test_index in skf.split(X_subset, y):
                 X_treino, X_teste = X_subset.iloc[train_index], X_subset.iloc[test_index]
                 y_treino, y_teste = y.iloc[train_index], y.iloc[test_index]
                 
-                # O pipeline transforma os dados de treino e depois treina o modelo
                 pipeline.fit(X_treino, y_treino)
                 
-                # O pipeline transforma os dados de teste (usando o padrão do treino) e faz as predições
                 predicoes = pipeline.predict(X_teste)
                 probabilidades = pipeline.predict_proba(X_teste)[:, 1] 
                 
@@ -158,14 +154,14 @@ def avaliar_colecoes(dict_colecoes, qtde_atributos):
                 'Quantidade Atributos': qtde_atributos,
                 'Coleção': nome_colecao,
                 'Algoritmo': nome_modelo,
-                'Verdadeiros Negativos (VN)': tn,
-                'Falsos Positivos (FP)': fp,
-                'Falsos Negativos (FN)': fn,
-                'Verdadeiros Positivos (VP)': tp
+                'Verdadeiros Negativos (VN) [Real: Desmame, Previsto: Desmame]': tn,
+                'Falsos Positivos (FP) [Real: Desmame, Previsto: Sucesso]': fp,
+                'Falsos Negativos (FN) [Real: Sucesso, Previsto: Desmame]': fn,
+                'Verdadeiros Positivos (VP) [Real: Sucesso, Previsto: Sucesso]': tp
             })
 
 # ==========================================
-# 5. EXECUÇÃO E EXPORTAÇÃO
+# 5. EXECUÇÃO E EXPORTAÇÃO (ATUALIZADO)
 # ==========================================
 avaliar_colecoes(colecao_10_atributos, 10)
 avaliar_colecoes(colecao_15_atributos, 15)
@@ -176,13 +172,35 @@ print("\nProcessamento dos modelos concluído! Gerando Excel...")
 df_resultados = pd.DataFrame(lista_resultados)
 df_matrizes = pd.DataFrame(lista_matrizes_confusao)
 
+# =========================================================
+# NOVO: Criando o DataFrame Consolidado (Média e Desvio Padrão)
+# =========================================================
+# 1. Definimos quais colunas numéricas queremos calcular a média e desvio
+colunas_metricas = ['Acurácia', 'Sensibilidade', 'Especificidade', 'F1-Score', 'AUC-ROC']
+
+# 2. Agrupamos por 'Algoritmo' e usamos o .agg para passar uma lista de operações ['mean', 'std']
+df_consolidado = df_resultados.groupby('Algoritmo')[colunas_metricas].agg(['mean', 'std']).reset_index()
+
+# 3. O agrupamento com múltiplas funções cria nomes de colunas em multinível (ex: Acurácia -> mean). 
+# Aqui usamos list comprehension para achatar e juntar os nomes (ex: 'Acurácia_mean', 'Acurácia_std')
+df_consolidado.columns = ['_'.join(col).strip('_') for col in df_consolidado.columns.values]
+
+# 4. Arredondar os resultados consolidados para 4 casas decimais, para manter a consistência
+df_consolidado = df_consolidado.round(4)
+# =========================================================
+
 # Salvar as tabelas
-# Criei a pasta interpretacao se ela não existir
 os.makedirs('interpretacao', exist_ok=True)
 nome_arquivo_excel = 'interpretacao/resultados_modelos_10fold.xlsx'
 
 with pd.ExcelWriter(nome_arquivo_excel) as writer:
+    # Salvando a aba original de Métricas
     df_resultados.to_excel(writer, sheet_name='Métricas', index=False)
+    
+    # Salvando a aba original de Matrizes
     df_matrizes.to_excel(writer, sheet_name='Matrizes de Confusão', index=False)
+    
+    # NOVO: Salvando a nova aba com o consolidado
+    df_consolidado.to_excel(writer, sheet_name='Consolidado por Algoritmo', index=False)
 
-print(f"\nArquivo Excel '{nome_arquivo_excel}' gerado com sucesso!")
+print(f"\nArquivo Excel '{nome_arquivo_excel}' gerado com sucesso! (Inclui aba Consolidada)")
